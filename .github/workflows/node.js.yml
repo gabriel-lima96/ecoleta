@@ -10,9 +10,13 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  web:
 
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working_directory: web
 
     strategy:
       matrix:
@@ -37,3 +41,17 @@ jobs:
         # args: # optional
         # Set the sonar.projectBaseDir analysis property
         # projectBaseDir: # optional, default is .
+  
+  # server:
+
+  #   runs-on: ubuntu-latest
+
+  #   defaults:
+  #     run:
+  #       working_directory: web
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x, 15.x]
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
