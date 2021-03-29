@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working_directory: web
+        working-directory: web
 
     strategy:
       matrix:
