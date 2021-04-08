@@ -34,7 +34,7 @@ jobs:
     - name: Run build
       run: npm run build --if-present
     - name: Inspect code with eslint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint ./src --ext .js,.jsx,.ts,.tsx
     - name: Run tests
       run: npm test
   
@@ -62,6 +62,6 @@ jobs:
     - name: Run build
       run: npm run build --if-present
     - name: Inspect code with eslint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint ./src --ext .js,.jsx,.ts,.tsx
     - name: Run tests
       run: npm test
