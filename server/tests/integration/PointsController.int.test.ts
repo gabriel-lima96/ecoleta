@@ -23,7 +23,7 @@ describe('Points integration test', () => {
     await connection.seed.run();
     app.listen(3333);
   });
-  test('GET /points/{id}', async () => {
+  test('GET /points/{id}', async (done) => {
     const pointId = (await factory(1))[0];
 
     const items = await connection('items')
@@ -40,8 +40,9 @@ describe('Points integration test', () => {
     const response = await axios.get(`http://localhost:3333/points/${pointId}`);
 
     expect(response.data).toEqual({ point: serializedPoint, items });
+    done();
   });
-  test('POST /points', async () => {
+  test('POST /points', async (done) => {
     const companyName = faker.company.companyName();
 
     // const image = await axios.get(faker.image.business(), {
@@ -76,5 +77,6 @@ describe('Points integration test', () => {
 
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toMatch('json');
+    done();
   });
 });
