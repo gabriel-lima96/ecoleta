@@ -1,5 +1,5 @@
 import express from 'express';
-import { celebrate, Joi } from 'celebrate';
+import { Joi, celebrate } from 'celebrate';
 
 import multer from 'multer';
 import multerConfig from './config/multer';
@@ -37,9 +37,9 @@ routes.post(
     },
     {
       abortEarly: false,
-    }
+    },
   ),
-  pointsController.create
+  pointsController.create,
 );
 
 export default routes;

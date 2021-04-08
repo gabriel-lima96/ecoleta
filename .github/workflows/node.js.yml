@@ -10,28 +10,33 @@ on:
     branches: [ master ]
 
 jobs:
-  # web:
+  web:
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   defaults:
-  #     run:
-  #       working-directory: web
+    defaults:
+      run:
+        working-directory: web
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x, 15.x]
-  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Use Node.js ${{ matrix.node-version }}
-  #     uses: actions/setup-node@v1
-  #     with:
-  #       node-version: ${{ matrix.node-version }}
-  #   - run: npm ci
-  #   - run: npm run build --if-present
-  #   - run: npm test
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+    - run: npm ci
+    - name: Run build
+    - run: npm run build --if-present
+    - name: Inspect code with eslint
+    - run: npx eslint . --ext .js,.jsx,.ts,.tsx
+    - name: Run tests
+    - run: npm test
   
   server:
 
@@ -52,7 +57,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
     - run: npm ci
+    - name: Run build
     - run: npm run build --if-present
+    - name: Inspect code with eslint
+    - run: npx eslint . --ext .js,.jsx,.ts,.tsx
+    - name: Run tests
     - run: npm test
-

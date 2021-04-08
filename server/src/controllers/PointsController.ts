@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
-import ItemsController from './ItemsController';
 
 class PointsController {
   async index(request: Request, response: Response) {
@@ -18,12 +17,10 @@ class PointsController {
       .distinct()
       .select('points.*');
 
-    const serializedPoints = points.map((point) => {
-      return {
-        ...point,
-        image_url: `http://192.168.31.122:3333/uploads/${point.image}`,
-      };
-    });
+    const serializedPoints = points.map((point) => ({
+      ...point,
+      image_url: `http://localhost:3333/uploads/${point.image}`,
+    }));
 
     return response.json(serializedPoints);
   }
@@ -39,7 +36,7 @@ class PointsController {
 
     const serializedPoint = {
       ...point,
-      image_url: `http://192.168.31.122:3333/uploads/${point.image}`,
+      image_url: `http://localhost:3333/uploads/${point.image}`,
     };
 
     const items = await knex('items')
@@ -65,7 +62,8 @@ class PointsController {
     const trx = await knex.transaction();
 
     const point = {
-      image: request.file.filename,
+      // image: request.file.filename,
+      image: '3c04d3d22308-market.jpeg',
       name,
       email,
       whatsapp,
@@ -82,12 +80,10 @@ class PointsController {
     const pointItems = items
       .split(',')
       .map((item: string) => Number(item.trim()))
-      .map((item_id: number) => {
-        return {
-          item_id,
-          point_id,
-        };
-      });
+      .map((item_id: number) => ({
+        item_id,
+        point_id,
+      }));
 
     await trx('point_items').insert(pointItems);
 
