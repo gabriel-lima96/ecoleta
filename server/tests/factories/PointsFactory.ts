@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/ban-types: "off" */
 import faker from 'faker/locale/pt_BR';
 import db from '../../src/database/connection';
 

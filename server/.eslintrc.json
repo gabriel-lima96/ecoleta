@@ -25,6 +25,10 @@
     "no-console": "off",
     "camelcase": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "class-methods-use-this": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: "off" */
 import request from 'supertest';
 import app from '../app';
 
@@ -14,7 +15,7 @@ const items = [
   },
 ];
 
-const mockSelectMethod = jest.fn((item) => items);
+const mockSelectMethod = jest.fn(() => items);
 
 jest.mock('../database/connection', () =>
   jest.fn().mockImplementation(() => ({ select: mockSelectMethod })),
@@ -27,7 +28,7 @@ describe('ItemsController unit test', () => {
   it('should fetch database items once', () =>
     request(app)
       .get('/items')
-      .then((response) => {
+      .then(() => {
         expect(mockSelectMethod).toHaveBeenCalledTimes(1);
       }));
   it('should return a success response', () =>
@@ -52,7 +53,7 @@ describe('ItemsController unit test', () => {
           title: item.title,
           image_url: `http://localhost:3333/uploads/${item.image}`,
         }));
-        // .toBe só funciona com tipos extritos ou se o objeto é exatamente o mesmo (mesma referência)
+        // .toBe só funciona com tipos extritos ou se o objeto é exatamente o mesmo
         expect(response.body).toEqual(expectedItems);
       }));
 });
