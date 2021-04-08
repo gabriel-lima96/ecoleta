@@ -25,26 +25,32 @@ describe('ItemsController unit test', () => {
   beforeEach(() => {
     mockSelectMethod.mockClear();
   });
-  it('should fetch database items once', () =>
+  it('should fetch database items once', (done) =>
     request(app)
       .get('/items')
       .then(() => {
         expect(mockSelectMethod).toHaveBeenCalledTimes(1);
+        done();
       }));
-  it('should return a success response', () =>
+
+  it('should return a success response', (done) =>
     request(app)
       .get('/items')
       .then((response) => {
         expect(response.status).toBe(200);
+        done();
       }));
-  it('should return a Content-Type json', () =>
+
+  it('should return a Content-Type json', (done) =>
     request(app)
       .get('/items')
       .then((response) => {
         // .toMatch pode receber um RegExp ou uma string
         expect(response.get('Content-Type')).toMatch('json');
+        done();
       }));
-  it('should return the array of items as json', () =>
+
+  it('should return the array of items as json', (done) =>
     request(app)
       .get('/items')
       .then((response) => {
@@ -55,5 +61,6 @@ describe('ItemsController unit test', () => {
         }));
         // .toBe só funciona com tipos extritos ou se o objeto é exatamente o mesmo
         expect(response.body).toEqual(expectedItems);
+        done();
       }));
 });

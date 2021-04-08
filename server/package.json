@@ -8,7 +8,7 @@
     "knex:seed": "knex --knexfile knexfile.ts seed:run",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "build": "npm run knex:migrate && npm run knex:seed",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test:dev": "jest --watch --maxWorkers=50% --detectOpenHandles"
   },
   "keywords": [],

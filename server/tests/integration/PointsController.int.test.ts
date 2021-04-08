@@ -18,11 +18,15 @@ const createArrayOfItemIds = (): number[] => {
 };
 
 describe('Points integration test', () => {
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     await connection.migrate.latest();
     await connection.seed.run();
     app.listen(3333);
+    done();
   });
+  afterAll(() => {
+    connection.destroy();
+  })
   test('GET /points/{id}', async (done) => {
     const pointId = (await factory(1))[0];
 
