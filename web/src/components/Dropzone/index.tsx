@@ -34,7 +34,7 @@ const Dropzone: React.FC<Props> = ({ onFileUploaded }) => {
       <input {...getInputProps()} accept="image/*" />
 
       {selectedFileUrl ? (
-        <img src={selectedFileUrl} />
+        <img src={selectedFileUrl} alt="Imagem Selecionada" />
       ) : (
         <p>
           <FiUpload />
