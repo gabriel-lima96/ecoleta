@@ -27,7 +27,7 @@ interface IBGECityResponse {
   nome: string;
 }
 
-const CreatePoint: JSX.Element = () => {
+const CreatePoint = (): JSX.Element => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
