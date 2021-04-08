@@ -4,11 +4,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 
-import logo from '../../assets/logo.svg';
 import { FiArrowLeft } from 'react-icons/fi';
 import './styles.css';
 
 import axios from 'axios';
+import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
 import Dropzone from '../../components/Dropzone';
@@ -27,7 +27,7 @@ interface IBGECityResponse {
   nome: string;
 }
 
-const CreatePoint = () => {
+const CreatePoint: JSX.Element = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -73,7 +73,7 @@ const CreatePoint = () => {
   useEffect(() => {
     axios
       .get<IBGEUFResponse[]>(
-        'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+        'https://servicodados.ibge.gov.br/api/v1/localidades/estados',
       )
       .then((response) => {
         const ufInitials = response.data.map((uf) => uf.sigla);
@@ -88,7 +88,7 @@ const CreatePoint = () => {
 
     axios
       .get<IBGECityResponse[]>(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`,
       )
       .then((response) => {
         const cityNames = response.data.map((city) => city.nome);
@@ -113,7 +113,10 @@ const CreatePoint = () => {
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
 
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
 
   function handleSelectItem(id: number) {
