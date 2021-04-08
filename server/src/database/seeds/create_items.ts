@@ -1,6 +1,7 @@
+/* eslint import/prefer-default-export: "off" */
 import Knex from 'knex';
 
-export default async function seed(knex: Knex) {
+export async function seed(knex: Knex) {
   await knex('items').insert([
     { title: 'Lâmpadas', image: 'lampadas.svg' },
     { title: 'Pilhas e Baterias', image: 'baterias.svg' },
